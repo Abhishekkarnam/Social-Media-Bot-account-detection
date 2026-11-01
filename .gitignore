@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+data/raw/
+data/normalized/
+data/processed/
+reports/inspection.json
+outputs/
+*.pt
+*.joblib

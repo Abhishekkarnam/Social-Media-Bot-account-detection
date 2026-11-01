@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="Multi-dataset Twitter bot detection and network intelligence.">
+  <title>{% block title %}BotDetect{% endblock %} · Twitter Intelligence Platform</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="BotDetect dashboard"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5 27 9.8v12.4L16 28.5 5 22.2V9.8L16 3.5Z"/><path d="M10 17.5h3.2l2-6 3.3 9 1.6-4H23"/></svg></span><span class="brand-copy"><strong>Bot<span>Detect</span></strong><small>TWITTER INTELLIGENCE</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="primary-nav" aria-label="Main navigation">
+        <a class="nav-link {% if active == 'dashboard' %}active{% endif %}" href="/"><span class="nav-icon">◫</span><span>Dashboard</span></a>
+        <a class="nav-link {% if active == 'single' %}active{% endif %}" href="/single"><span class="nav-icon">◎</span><span>Single detection</span></a>
+        <a class="nav-link {% if active == 'bulk' %}active{% endif %}" href="/bulk"><span class="nav-icon">▤</span><span>Bulk detection</span></a>
+        <a class="nav-link {% if active == 'datasets' %}active{% endif %}" href="/datasets"><span class="nav-icon">◈</span><span>Dataset analysis</span></a>
+        <a class="nav-link {% if active == 'results' %}active{% endif %}" href="/results"><span class="nav-icon">▦</span><span>Detection results</span></a>
+        <a class="nav-link {% if active == 'models' %}active{% endif %}" href="/models"><span class="nav-icon">⌘</span><span>Model information</span></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-note"><span class="note-orb"></span><div><strong>Research workspace</strong><small>Scores are not verified labels.</small></div></div><div class="user-chip"><div class="avatar">BD</div><div><strong>BotDetect</strong><small>Local deployment</small></div><span class="more-dots">···</span></div></div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar"><div class="breadcrumbs"><span>Workspace</span><b>/</b><strong>{% block breadcrumb %}Dashboard{% endblock %}</strong></div><div class="topbar-right"><div class="api-status ok"><span class="status-dot"></span><span>Backend online</span></div><span class="top-date">{{ date }}</span></div></header>
+      <section class="page-container">{% block content %}{% endblock %}</section>
+      <footer class="page-footer"><span>BotDetect <b>·</b> Local model inference</span><span>Human 0 <i></i> Bot 1 <b>·</b> Model scores may be uncalibrated</span></footer>
+    </main>
+  </div>
+</body>
+</html>
