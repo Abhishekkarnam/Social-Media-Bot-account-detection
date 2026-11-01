@@ -54,11 +54,21 @@ FEATURE_LABELS = {
 }
 
 
+def model_directory(model_id: str) -> Path:
+    """Accept both the bundled experiment names and the trainer's default output names."""
+    outputs = PROJECT / "outputs"
+    candidates = [outputs / model_id]
+    if model_id.startswith("experiment_"):
+        candidates.append(outputs / model_id.removeprefix("experiment_"))
+    available = [path for path in candidates if (path / "model.pt").is_file()]
+    return max(available, key=lambda path: (path / "model.pt").stat().st_mtime) if available else candidates[0]
+
+
 @lru_cache(maxsize=10)
 def _model_metadata(model_id: str) -> tuple[dict[str, Any], dict[str, Any], Path]:
     if model_id not in MODEL_DIRS:
         raise HTTPException(400, "That trained model is not available.")
-    folder = PROJECT / "outputs" / model_id
+    folder = model_directory(model_id)
     try:
         checkpoint = torch.load(folder / "model.pt", map_location="cpu", weights_only=True)
         preprocessing = joblib.load(folder / "preprocessing.joblib")
@@ -164,7 +174,7 @@ def _predict(model_id: str, dataset: str, matrix: np.ndarray, threshold: float,
 def model_catalog():
     result = []
     for model_id, (title, kind) in MODEL_DIRS.items():
-        folder = PROJECT / "outputs" / model_id
+        folder = model_directory(model_id)
         if not (folder / "model.pt").exists():
             continue
         checkpoint, _, _ = _model_metadata(model_id)

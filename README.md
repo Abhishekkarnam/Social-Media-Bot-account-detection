@@ -108,6 +108,8 @@ Open `http://127.0.0.1:8000`. The pages use native form submissions:
 
 SNAP has no supervised labels/checkpoint; MGTAB-large has no supervised checkpoint and only 10,199 mapped labels. These are shown as dataset information, not offered as unsupported prediction paths. Prediction result history is held in memory and resets when the local server restarts. See `api_server.py` for server-side route handling and the compatible model allowlist.
 
+The GitHub repository intentionally contains source code only. Raw/processed datasets, prediction outputs, and `.pt`/`.joblib` model artifacts are excluded by `.gitignore`; obtain the datasets from their official sources and train checkpoints locally before expecting inference models to appear in the dashboard. The API accepts both the bundled `outputs/experiment_<dataset>_<model>/` layout and the trainer's default `outputs/<dataset>_<model>/` layout, provided `model.pt` and `preprocessing.joblib` are together.
+
 ## Evaluation boundaries
 
 The primary labels are available for MGTAB and Cresci-2017. Their input schemas are not directly compatible: MGTAB has anonymous profile/text dimensions while Cresci-2017 exposes named profile counts and flags. Cresci-15 includes text embedding groups whose source model metadata is absent. Joint training uses source-specific encoders, but that does not constitute a leave-one-dataset-out experiment. No valid cross-dataset evaluation command is available until a shared feature representation is verified; do not treat the joint training split metrics as external transfer results. Cresci-2017's label groups are campaigns, so its row-random split may share campaign characteristics across partitions. No SNAP/MGTAB-large supervised metrics are produced.
