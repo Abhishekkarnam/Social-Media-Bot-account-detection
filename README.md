@@ -61,6 +61,14 @@ python train_multidataset.py --dataset cresci2015 --model mlp --epochs 80
 python train_multidataset.py --dataset cresci2017 --model mlp --epochs 80
 ```
 
+To train the supported labeled datasets sequentially with the recommended model for each, run:
+
+```powershell
+python scripts/train_all.py
+```
+
+The defaults are 80 epochs and patience 6. Override them if needed, for example `python scripts/train_all.py --epochs 100 --patience 10`. The runner stops on the first failed training run. SNAP has no labels, and MGTAB-large does not have a supervised checkpoint in this project, so neither is trained by this script.
+
 The historical `train_multidataset.py` name remains as a compatibility entry point. Each run saves `model.pt`, `preprocessing.joblib`, `metrics.json`, `run_config.json`, and test predictions under `outputs/<dataset>_<model>/`.
 
 For joint training with different feature dimensions, each source gets its own input encoder and shares the bot/human head. Each graph remains an independent component; dataset losses are averaged so a larger source does not automatically dominate. R-GNN relation transforms are dataset-specific because numeric relation codes do not establish matching semantics across sources.
