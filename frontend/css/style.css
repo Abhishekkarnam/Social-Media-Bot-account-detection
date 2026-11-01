@@ -162,7 +162,7 @@ body::after { top: 44%; right: -235px; background: #12677a; animation-delay: -8s
 .pill.bot { border-color: rgba(241, 109, 121, .23); color: #ff9ca5; background: rgba(241, 109, 121, .08); }
 .pill.human { border-color: rgba(50, 214, 160, .22); color: #79e1b6; background: rgba(50, 214, 160, .07); }
 .pill.uncertain { border-color: rgba(245, 185, 66, .23); color: #f3ca7d; background: rgba(245, 185, 66, .07); }
-.connection-banner, .hint-block, .error-block, .success-block { margin: 0 0 17px; border: 1px solid var(--border); border-radius: 11px; padding: 12px 14px; font-size: 10px; }
+.connection-banner, .hint-block, .error-block, .success-block { margin: 7px 0 17px; border: 1px solid var(--border); border-radius: 11px; padding: 12px 14px; font-size: 10px; }
 .connection-banner { display: flex; align-items: center; gap: 10px; color: #cfb77e; border-color: rgba(245, 185, 66, .18); background: rgba(245, 185, 66, .045); }
 .connection-banner.ok { color: #a0d6be; border-color: rgba(50, 214, 160, .18); background: rgba(50, 214, 160, .045); }
 .connection-banner .status-dot { flex: none; background: var(--warning); }
